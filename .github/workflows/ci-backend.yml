@@ -1,0 +1,38 @@
+name: ci-backend
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "backend/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "backend/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r backend/requirements.txt
+
+      - name: Run tests
+        run: |
+          cd backend
+          pytest
+
+  # TODO: Add a build-and-push job that:
+  #   - Runs only after the test job passes
+  #   - Runs only on push to main (not on pull requests)
+  #   - Logs in to Docker Hub using DOCKERHUB_USERNAME and DOCKERHUB_TOKEN secrets
+  #   - Builds the Docker image from ./backend
+  #   - Pushes the image tagged with the commit SHA

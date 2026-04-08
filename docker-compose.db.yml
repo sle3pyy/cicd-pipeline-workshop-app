@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  postgres:
+    build: ./database
+    environment:
+      POSTGRES_INITDB_ARGS: "-U postgres"
+      POSTGRES_PASSWORD: postgres
+      WORKSHOP_USER_PASSWORD: workshop_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/migrations:/flyway/sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d cicd_workshop_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
