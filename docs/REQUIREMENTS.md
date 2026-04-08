@@ -106,7 +106,7 @@ docker login
 
 Ensure these ports are available:
 - **3000**: Frontend (React)
-- **5000**: Backend (Flask)
+- **8000**: Backend (FastAPI)
 - **5432**: PostgreSQL
 
 ### Checking Available Ports
@@ -114,7 +114,7 @@ Ensure these ports are available:
 ```bash
 # macOS/Linux
 lsof -i :3000
-lsof -i :5000
+lsof -i :8000
 lsof -i :5432
 
 # Windows
