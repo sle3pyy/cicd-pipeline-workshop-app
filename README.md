@@ -1,4 +1,4 @@
-# DevOps Porto Get-Together — CI/CD Pipeline Workshop
+# Designing and implementing a CI/CD pipeline workshop
 
 A hands-on workshop where participants design and implement a CI/CD pipeline for a real 3-tier web application using GitHub Actions, Docker, and ArgoCD.
 
