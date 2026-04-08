@@ -38,8 +38,15 @@ On paper or a whiteboard, sketch the pipeline before writing any code.
 
 Answer these questions:
 
+**Branching strategy**
+- How will the team collaborate? (e.g. GitHub Flow, Gitflow, trunk-based development)
+- Which branch is the source of truth for deployments?
+- Should feature branches be short-lived or long-lived?
+- Will you use pull requests? Who reviews them?
+
 **Triggers**
 - When should the pipeline run? (push to `main`? any branch? pull requests?)
+- Should images be published on every push or only on tagged releases?
 
 **Stages**
 - What needs to happen before building a Docker image?
@@ -49,6 +56,7 @@ Answer these questions:
 **Quality gates**
 - What must pass before an image is built?
 - What must pass before an image is pushed?
+- Should pull requests be blocked if the pipeline fails?
 
 **Expected pipeline shape:**
 
@@ -359,6 +367,7 @@ Complete the `build-and-push` job in `.github/workflows/ci-database.yml` followi
 ## Checklist
 
 ### Task 0 — Pipeline Design
+- [ ] Branching strategy defined
 - [ ] Triggers defined (push, pull_request)
 - [ ] Stages identified (test → build → push)
 - [ ] Quality gates decided
