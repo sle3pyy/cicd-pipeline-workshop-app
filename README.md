@@ -43,6 +43,12 @@ Docker images → Docker Hub     →   Deployed to cluster
 
 **Prerequisites:** Docker & Docker Compose, Git, Node.js 18+, Python 3.12+
 
+Verify your machine is ready before the workshop:
+
+```bash
+bash verify-workshop-reqs.sh
+```
+
 ```bash
 # Clone and start the full stack
 git clone <this-repo>

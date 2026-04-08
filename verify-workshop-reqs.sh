@@ -45,10 +45,10 @@ FAIL=0
 SKIP=0
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
-pass() { echo -e "  ${GREEN}✔${RESET}  $1"; ((PASS++)); }
-warn() { echo -e "  ${YELLOW}⚠${RESET}  $1"; ((WARN++)); }
-fail() { echo -e "  ${RED}✘${RESET}  $1"; ((FAIL++)); }
-skip() { echo -e "  ${CYAN}–${RESET}  $1 ${CYAN}(skipped)${RESET}"; ((SKIP++)); }
+pass() { echo -e "  ${GREEN}✔${RESET}  $1"; PASS=$((PASS + 1)); }
+warn() { echo -e "  ${YELLOW}⚠${RESET}  $1"; WARN=$((WARN + 1)); }
+fail() { echo -e "  ${RED}✘${RESET}  $1"; FAIL=$((FAIL + 1)); }
+skip() { echo -e "  ${CYAN}–${RESET}  $1 ${CYAN}(skipped)${RESET}"; SKIP=$((SKIP + 1)); }
 info() { echo -e "  ${BLUE}ℹ${RESET}  $1"; }
 section() {
   echo ""
