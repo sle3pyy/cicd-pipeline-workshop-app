@@ -27,7 +27,7 @@
 Frontend (React)              Backend (FastAPI)           Database (PostgreSQL)
 ├── src/                      ├── app.py               ├── schema.sql
 ├── package.json              ├── models.py            ├── seed.sql
-├── vite.config.js            ├── test_app.py          └── init.sh
+├── vite.config.js            ├── test_app.py          └── flyway-init.sh
 ├── Dockerfile                ├── requirements.txt
 ├── index.html                ├── .env.example
 └── src/App.jsx               └── Dockerfile
@@ -102,11 +102,11 @@ cicd-pipeline-workshop-app/
 ├── database/                 # PostgreSQL
 │   ├── schema.sql           # Schema (TODO: define tables)
 │   ├── seed.sql             # Seed data (TODO: add)
-│   └── init.sh              # Init script
+│   └── flyway-init.sh       # Runs migrations on container startup
 ├── docker-compose.yml        # Local development stack
 ├── docs/
-│   ├── SETUP.md
-│   ├── IMPLEMENTATION.md
+
+
 │   └── ARCHITECTURE.md
 └── README.md
 ```
