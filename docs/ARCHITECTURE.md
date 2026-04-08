@@ -15,7 +15,7 @@
       ┌────────┐         ┌─────────┐         ┌──────────┐
       │Frontend │         │ Backend │         │PostgreSQL│
       │(Port   │         │(Port   │         │(Port    │
-      │ 3000)  │         │ 5000)  │         │ 5432)   │
+      │ 3000)  │         │ 8000)  │         │ 5432)   │
       └────────┘         └─────────┘         └──────────┘
          △                   △                    △
          │                   │                    │
@@ -24,7 +24,7 @@
       └──────────────────────────────────────────────┘
 
 
-Frontend (React)              Backend (Flask)           Database (PostgreSQL)
+Frontend (React)              Backend (FastAPI)           Database (PostgreSQL)
 ├── src/                      ├── app.py               ├── schema.sql
 ├── package.json              ├── models.py            ├── seed.sql
 ├── vite.config.js            ├── test_app.py          └── init.sh
@@ -39,7 +39,7 @@ Frontend (React)              Backend (Flask)           Database (PostgreSQL)
 |-------|-----------|---------|
 | Frontend | React | 18.2.0 |
 | Frontend Bundler | Vite | 5.0.0 |
-| Backend | Flask | 3.0.0 |
+| Backend | FastAPI | 0.115.0 |
 | Database | PostgreSQL | 15 |
 | Testing (Backend) | pytest | 7.4.3 |
 | Testing (Frontend) | Vitest | 1.0.0 |
@@ -50,7 +50,7 @@ Frontend (React)              Backend (Flask)           Database (PostgreSQL)
 
 ### Frontend (.env)
 ```
-REACT_APP_API_URL=http://localhost:5000
+REACT_APP_API_URL=http://localhost:8000
 REACT_APP_ENV=development
 ```
 
@@ -58,7 +58,7 @@ REACT_APP_ENV=development
 ```
 FLASK_ENV=development
 DATABASE_URL=postgresql://workshop_user:workshop_pass@localhost:5432/workshop_db
-PORT=5000
+PORT=8000
 ```
 
 ### Database (docker-compose.yml)
@@ -92,7 +92,7 @@ cicd-pipeline-workshop-app/
 │   ├── vite.config.js
 │   ├── index.html
 │   └── Dockerfile
-├── backend/                  # Flask API
+├── backend/           # FastAPI
 │   ├── app.py               # Main app (TODO: implement endpoints)
 │   ├── models.py            # Data models (TODO: define)
 │   ├── test_app.py          # Tests
