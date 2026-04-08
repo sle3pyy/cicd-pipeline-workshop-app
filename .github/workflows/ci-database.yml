@@ -1,0 +1,37 @@
+name: ci-database
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "database/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "database/**"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate migration file naming convention
+        run: |
+          cd database/migrations
+          for f in *.sql; do
+            if ! echo "$f" | grep -qE '^V[0-9]+(\.[0-9]+)?__[a-zA-Z0-9_]+\.sql$'; then
+              echo "Invalid migration filename: $f"
+              echo "Expected format: V<version>__<description>.sql"
+              exit 1
+            fi
+          done
+          echo "All migration filenames are valid"
+
+  # TODO: Add a build-and-push job that:
+  #   - Runs only after the validate job passes
+  #   - Runs only on push to main (not on pull requests)
+  #   - Logs in to Docker Hub using DOCKERHUB_USERNAME and DOCKERHUB_TOKEN secrets
+  #   - Builds the Docker image from ./database
+  #   - Pushes the image tagged with the commit SHA
