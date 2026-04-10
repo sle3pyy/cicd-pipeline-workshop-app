@@ -28,6 +28,26 @@ jobs:
             fi
           done
           echo "All migration filenames are valid"
+  build:
+    runs-on: ubuntu-latest
+    needs: [validate]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push database image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./database
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/database:${{ github.sha }}
 
   # TODO: Add a build-and-push job that:
   #   - Runs only after the validate job passes

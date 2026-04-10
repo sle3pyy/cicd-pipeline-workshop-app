@@ -30,6 +30,26 @@ jobs:
       - name: Run tests
         run: npm test --prefix frontend
 
+  build:
+    runs-on: ubuntu-latest
+    needs: [test]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push frontend image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./frontend
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/frontend:${{ github.sha }}
   # TODO: Add a build-and-push job that:
   #   - Runs only after the test job passes
   #   - Runs only on push to main (not on pull requests)
