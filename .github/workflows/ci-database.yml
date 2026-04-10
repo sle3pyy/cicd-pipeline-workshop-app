@@ -54,10 +54,3 @@ jobs:
           context: ./database
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/database:${{ github.sha }}
-
-  # TODO: Add a build-and-push job that:
-  #   - Runs only after the validate job passes
-  #   - Runs only on push to main (not on pull requests)
-  #   - Logs in to Docker Hub using DOCKERHUB_USERNAME and DOCKERHUB_TOKEN secrets
-  #   - Builds the Docker image from ./database
-  #   - Pushes the image tagged with the commit SHA

@@ -25,4 +25,5 @@ RUN chmod +x /docker-entrypoint-initdb.d/01-flyway-init.sh
 HEALTHCHECK --interval=10s --timeout=5s --retries=5 \
     CMD pg_isready -U postgres || exit 1
 
+    
 EXPOSE 5432
