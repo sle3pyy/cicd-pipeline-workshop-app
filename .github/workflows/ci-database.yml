@@ -34,6 +34,12 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
     steps:
+      - name: Check required secrets exist
+        run: |
+          test -n "${{ secrets.DOCKERHUB_USERNAME }}" || (echo "DOCKERHUB_USERNAME is missing" && exit 1)
+          test -n "${{ secrets.DOCKERHUB_TOKEN }}" || (echo "DOCKERHUB_TOKEN is missing" && exit 1)
+          echo "Required secrets are configured"
+
       - uses: actions/checkout@v4
 
       - name: Log in to Docker Hub
